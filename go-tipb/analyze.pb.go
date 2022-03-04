@@ -57,6 +57,7 @@
 		InUnionMetadata
 		CompareInMetadata
 		ResourceGroupTag
+		ResourceGroupTagSQL
 		TableInfo
 		ColumnInfo
 		IndexInfo

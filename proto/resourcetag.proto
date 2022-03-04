@@ -12,11 +12,25 @@ option (gogoproto.sizer_all) = true;
 option (gogoproto.unmarshaler_all) = true;
 
 message ResourceGroupTag {
-  optional bytes sql_digest = 1;
-  optional bytes plan_digest = 2;
+  optional bytes sql_digest = 1 [deprecated=true];
+  optional bytes plan_digest = 2 [deprecated=true];
+
+  oneof tag_oneof {
+    ResourceGroupTagSQL sql = 3;
+    bytes backup_cmd = 4;
+    bytes restore_cmd = 5;
+    bytes import = 6;
+    bytes cdc_job = 7;
+  }
 
   // Use to label the handling kv type of the request.
   // This is for TiKV resource_metering to collect execution information by the key label.
+  optional ResourceGroupTagLabel label = 8 [deprecated=true];
+}
+
+message ResourceGroupTagSQL {
+  optional bytes sql_digest = 1;
+  optional bytes plan_digest = 2;
   optional ResourceGroupTagLabel label = 3;
 }
 
